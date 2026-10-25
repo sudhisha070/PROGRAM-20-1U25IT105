@@ -1,40 +1,16 @@
-#!/usr/bin/env bash
+bin/bash
 
-# Assignment: Assigning and Verifying an IP Address
-# Complete the TODO sections.
+# Linux Crontab Assignment
 
-set -eu
+# TODO 1: Determine the absolute path of cron_job.sh
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+CRON_SCRIPT="$SCRIPT_DIR/cron_job.sh"
 
-# TODO 1: Set the NetworkManager connection profile name.
-CONNECTION_NAME=""
+# TODO 2: Create a cron entry that runs cron_job.sh every minute
+CRON_ENTRY="* * * * * $CRON_SCRIPT"
 
-# TODO 2: Set the static IPv4 address with CIDR prefix.
-IP_ADDRESS=""
+# TODO 3 & 4: Install the cron entry without duplicates
+( crontab -l 2>/dev/null | grep -vF "$CRON_SCRIPT"; echo "$CRON_ENTRY" ) | crontab -
 
-# TODO 3: Set the IPv4 gateway.
-GATEWAY=""
-
-# TODO 4: Set the DNS server.
-DNS_SERVER=""
-
-echo "Checking network connection status..."
-
-# TODO 5: Display connection status using nmcli.
-
-echo "Configuring static IPv4 settings..."
-
-# TODO 6: Configure the connection using nmcli.
-# Required settings: ipv4.method manual, ipv4.addresses,
-# ipv4.gateway, and ipv4.dns.
-
-echo "Activating the connection..."
-
-# TODO 7: Activate the connection using nmcli connection up.
-
-echo "Verifying IP configuration..."
-
-# TODO 8: Display the assigned IP configuration using nmcli.
-
-# TODO 9: Display the active connection details.
-
-echo "IP assignment and verification completed."
+# TODO 5: Display the current user's crontab
+crontab -l
